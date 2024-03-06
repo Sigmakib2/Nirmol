@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bad Word Checker</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+  <h1>Bad Word Checker</h1>
+  <input type="text" id="textInput" placeholder="Enter your text here">
+  <button onclick="checkBadWords()">Check</button>
+  <div id="result"></div>
+
+  <script>
+    function checkBadWords() {
+      const inputText = document.getElementById('textInput').value;
+      fetch(`https://nirmol.cyclic.app/${encodeURIComponent(inputText)}`)
+        .then(response => response.json())
+        .then(data => {
+          const resultDiv = document.getElementById('result');
+          resultDiv.innerHTML = '';
+
+          if (data.bad_sentence) {
+            resultDiv.innerHTML += '<p>This sentence contains bad words:</p>';
+            resultDiv.innerHTML += `<p>Bad words: ${data.bad_word_list.join(', ')}</p>`;
+            resultDiv.innerHTML += `<p>Normal words: ${data.normal_words.join(', ')}</p>`;
+            resultDiv.innerHTML += `<p>Badness: ${data.badness}</p>`;
+          } else {
+            resultDiv.innerHTML = '<p>No bad words found in the sentence.</p>';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          document.getElementById('result').innerHTML = '<p>An error occurred. Please try again later.</p>';
+        });
+    }
+  </script>
 </body>
 </html>
