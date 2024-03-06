@@ -4,7 +4,7 @@ const app = express();
 const cors = require('cors');
 
 // Specify allowed origin
-const allowedOrigins = ['https://sigmakib2.github.io/Nirmol/'];
+const allowedOrigins = ['https://nirmol.pages.dev/'];
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
