@@ -1,6 +1,22 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
+const cors = require('cors');
+
+// Specify allowed origin
+const allowedOrigins = ['http://127.0.0.1:5500'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+//Enable CORS with specific origin
+app.use(cors(corsOptions));
 
 // Read the list of bad words from the Nirmol JSON file
 const word_list = JSON.parse(fs.readFileSync('nirmol.json', 'utf-8'));
