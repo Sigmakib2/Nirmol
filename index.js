@@ -40,33 +40,33 @@ app.get('/:sentence', (req, res) => {
 
   const words = sentence.split(' ');
 
-  let fruitsFound = [];
-  let nonFruitsFound = [];
+  let badWordFound = [];
+  let nonbadWordFound = [];
 
   for (const word of words) {
     if (isBadWord(word)) {
-      fruitsFound.push(word);
+      badWordFound.push(word);
     } else {
-      nonFruitsFound.push(word);
+      nonbadWordFound.push(word);
     }
   }
 
   const totalWords = words.length;
-  const fruitRate = (fruitsFound.length / totalWords) * 100;
+  const fruitRate = (badWordFound.length / totalWords) * 100;
 
-  if (fruitsFound.length > 0) {
+  if (badWordFound.length > 0) {
     res.json({
       bad_sentence: true,
-      bad_word_list: fruitsFound,
-      normal_words: nonFruitsFound,
+      bad_word_list: badWordFound,
+      normal_words: nonbadWordFound,
       badness: `${fruitRate.toFixed(2)}%`
     });
 
   } else {
     res.json({
       bad_sentence: false,
-      bad_word_list: fruitsFound,
-      normal_words: nonFruitsFound,
+      bad_word_list: badWordFound,
+      normal_words: nonbadWordFound,
       badness: `0%`
     });
   }
