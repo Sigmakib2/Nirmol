@@ -1,63 +1,515 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
   <title>Nirmol: Bangla Offensive Language Detection API and Dataset</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    /* Additional custom CSS */
-    .container {
-      max-width: 500px;
-      margin-top: 50px;
-    }
-  </style>
+  <meta name="description"
+    content="Nirmol (নির্মল) is a Microservice-based offensive language detection API. Detect offensive/bad/slang words in Bangla/Bengali/Banglish sentences. You can set up or host your API on any node js server.">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <script src="/scripts.js"></script>
+
+  <!-- Stylesheet
+============================== -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+  <!-- Font Awesome Icon -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css" />
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css" />
+  <!-- Highlight Syntax -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/highlight.js/styles/github.css" />
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css" />
 </head>
-<body>
-  <div class="container">
-      <h1 class="text-center">Nirmol</h1>
-      <p class="text-center">Nirmol (নির্মল) is a Bangla Offensive Language Detection API and Dataset</p>
-      <div class="input-group mb-3">
-          <input type="text" class="form-control" id="textInput" placeholder="Enter your text here" oninput="toggleButton()">
-          <button class="btn btn-primary" id="checkButton" onclick="checkBadWords()" disabled>Check</button>
+
+<body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+
+
+  <!-- Document Wrapper   
+=============================== -->
+  <div id="main-wrapper">
+
+    <!-- Header
+  ============================ -->
+    <header id="header" class="sticky-top">
+      <!-- Navbar -->
+      <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+        <div class="container-fluid">
+          <!-- Sidebar Toggler -->
+          <button id="sidebarCollapse" class="navbar-toggler d-block d-md-none" type="button"><span></span><span
+              class="w-75"></span><span class="w-50"></span></button>
+
+          <!-- Logo -->
+          <a class="logo ml-md-3" href="index.html" title="Nirmol Documentation"> <img src="/NIRMOL.png"
+              alt="iDocs Template" /> </a>
+          <span class="text-2 ml-2">v1.0</span>
+          <!-- Logo End -->
+
+          <!-- Navbar Toggler -->
+          <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+            data-target="#header-nav"><span></span><span></span><span></span></button>
+
+          <div id="header-nav" class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+
+              <li><a target="_blank" href="https://app.cyclic.sh/#/join/Sigmakib2">Deploy (Get 10$ free credit!)</a>
+              </li>
+            </ul>
+          </div>
+          <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+            <li class=""><a data-toggle="tooltip" href="https://github.com/Sigmakib2/Nirmol" target="_blank" title=""
+                data-original-title="GitHub Repository"><i class="fab fa-github"></i></a></li>
+          </ul>
         </div>
-        <div id="result"></div>
-        <img class="img-thumbnail img-fluid" src="/nirmol.png" alt="" srcset="">
-  </div>
+      </nav>
+      <!-- Navbar End -->
+    </header>
+    <!-- Header End -->
 
-  <!-- Bootstrap JS (optional if you're not using JS features from Bootstrap) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Content
+  ============================ -->
+    <div id="content" role="main">
 
-  <script>
-    function toggleButton() {
-      const inputText = document.getElementById('textInput').value.trim();
-      const checkButton = document.getElementById('checkButton');
-      checkButton.disabled = inputText === '';
-    }
+      <!-- Sidebar Navigation
+	============================ -->
+      <div class="idocs-navigation bg-light">
+        <ul class="nav flex-column ">
+          <li class="nav-item"><a class="nav-link active" href="#idocs_start">Getting Started</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link" href="#idocs_installation">Installation</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_html_structure">Local Development</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#API">API</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link" href="#Features">Features</a></li>
+              <li class="nav-item"><a class="nav-link" href="#Limitations">Limitations</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#update-dataset">Update API Dataset</a>
 
-    function checkBadWords() {
-      const inputText = document.getElementById('textInput').value;
-      fetch(`https://nirmol.cyclic.app/${encodeURIComponent(inputText)}`)
-        .then(response => response.json())
-        .then(data => {
-          const resultDiv = document.getElementById('result');
-          resultDiv.innerHTML = '';
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#use">Use Cases</a>
 
-          if (data.bad_sentence) {
-            resultDiv.innerHTML += '<div class="alert alert-danger" role="alert">This sentence contains bad words:</div>';
-            resultDiv.innerHTML += `<p>Bad words: ${data.bad_word_list.join(', ')}</p>`;
-            resultDiv.innerHTML += `<p>Normal words: ${data.normal_words.join(', ')}</p>`;
-            resultDiv.innerHTML += `<p>Badness: ${data.badness}</p>`;
-          } else {
-            resultDiv.innerHTML = '<div class="alert alert-success" role="alert">No bad words found in the sentence.</div>';
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          document.getElementById('result').innerHTML = '<div class="alert alert-danger" role="alert">An error occurred. Please try again later.</div>';
-        });
-    }
-  </script>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_source_credits">Source & Credits</a></li>
+        </ul>
+      </div>
+
+      <!-- Docs Content
+	============================ -->
+      <div class="idocs-content">
+        <div class="container">
+
+          <!-- Getting Started
+		============================ -->
+          <section id="idocs_start">
+            <h1>NIRMOL (নির্মল)</h1>
+            <h2>Bangla Offensive Language Detection API and Dataset</h2>
+            <p class="lead">Nirmol (নির্মল) is a Microservice-based offensive language detection API. Detect
+              offensive/bad/slang words in Bangla/Bengali/Banglish sentences. You can set up or host your API on any
+              node js server.</p>
+            <hr>
+            <div>
+              <p class="text-center">Here input a sentence to check if this is offensive or not. Under the hood, this is
+                using the Nirmol v1.0 API.</p>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="textInput" placeholder="Enter your text here"
+                  oninput="toggleButton()">
+                <button class="btn btn-primary" id="checkButton" onclick="checkBadWords()" disabled>Check</button>
+              </div>
+              <div id="result"></div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><strong>Version:</strong> 1.0</li>
+                  <li><strong>Author:</strong> <a href="https://github.com/Sigmakib2" target="_blank">Sakib Mahmud</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-sm-6 col-lg-4">
+                <ul class="list-unstyled">
+                  <li><strong class="font-weight-700">Created:</strong> 7 March, 2024</li>
+                  <li><strong>Update:</strong> 7 March, 2024</li>
+                </ul>
+              </div>
+            </div>
+            <p class="alert alert-info">If you have any questions that are beyond the scope of this help file, Please
+              feel free to discuss here: <a target="_blank"
+                href="https://github.com/Sigmakib2/Nirmol/discussions/">Nirmol Discussions</a>.</p>
+            <a class="popup-img" href="assets/nirmol-banner.png"><img class="img-fluid border"
+                src="assets/nirmol-banner.png" alt="Bangla Bad word detection API"></a></p>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Installation
+		============================ -->
+          <section id="idocs_installation">
+            <h2>Installation</h2>
+            <p class="lead">You can download the dataset from the GitHub repository but here is the <a
+                href="https://github.com/Sigmakib2/Nirmol/tree/main/datasets">Direct dataset link <i
+                  class="fas fa-external-link-alt"></i></a>. You can download
+              and use this dataset for ML and AI model training.</p>
+            <p class="lead">Nirmol API is based on:</p>
+            <ol>
+              <li>Node.js</li>
+              <li>Express.js</li>
+            </ol>
+            <p class="lead">npm package used</p>
+            <ol>
+              <li>body-parser</li>
+              <li>cors</li>
+              <li>fs</li>
+              <li>nodemon</li>
+            </ol>
+            <div>
+              <h3>Run Nirmol locally</h3>
+              <p class="lead"><b>Step 1:</b> Clone the Nirmol repository</p>
+              <pre><code class="bash">git clone https://github.com/Sigmakib2/Nirmol.git</code></pre>
+
+              <p class="lead"><b>Step 2:</b> Go to the Nirmol directory</p>
+              <pre><code class="bash">cd Nirmol</code></pre>
+
+              <p class="lead"><b>Step 3:</b> Install node modules</p>
+              <pre><code class="node">npm install</code></pre>
+
+              <p class="lead"><b>Step 4:</b> Start the project</p>
+              <pre><code class="node">npm start</code></pre>
+
+              <p>Then, open your web browser and navigate to http://localhost:3000, and you should see "Cannot GET /"
+                displayed on the page. To test the api you have to enter something after the '/'. For example
+                <b>"http://localhost:3000/hello world"</b>
+              </p>
+
+              <p class="alert alert-success">You can deploy this project or any other project for free on cyclic. If you
+                use this link and sign up then you will get free 10$ credit! <a target="_blank"
+                  href="https://app.cyclic.sh/#/join/Sigmakib2">Let's get 10$ free credit!</a>.</p>
+            </div>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Local Development
+		============================ -->
+          <section id="idocs_html_structure">
+            <h2>Local Development</h2>
+            <p>when you're developing locally, especially if you're running your frontend and backend on different ports
+              or domains, you'll likely need to enable CORS (Cross-Origin Resource Sharing) to allow the frontend to
+              communicate with the backend.</p>
+            <p>Express.js doesn't come with built-in CORS support, so you'll need to use a middleware package like cors
+              to enable it. You can install cors using npm. In this project it is already installed.</p>
+            <p>In the index.js file you will find a line like this:</p>
+            <pre><code class="js">const allowedOrigins = ['https://nirmol.pages.dev'];</code></pre>
+            <p>Here we allowed the origin 'https://nirmol.pages.dev'. In this example, only requests originating from
+              https://nirmol.pages.dev will be allowed to access your server's resources. Replace
+              'https://nirmol.pages.dev' with the actual origin you want to allow. For Example, if you are using html
+              and vs code live server then replace this link by this: 'http://127.0.0.1:5500'. Remember: origin url
+              should not have a '/' at the end.</p>
+            <hr class="divider">
+
+            <section id="API">
+              <h2>API Response</h2>
+              <p>The API endpoint analyzes a sentence for offensive/slang words and provides additional information
+                about the sentence.</p>
+              <p>For example here is a get request and response:</p>
+              <p><a class="popup-img" href="assets/get-req.png"><img class="img-fluid border" src="assets/get-req.png"
+                    alt="Bangla Bad word detection API"></a></p>
+              <pre><code class="json">{
+  "bad_sentence": true,
+  "bad_word_list": [
+    "কুত্তা"
+  ],
+  "normal_words": [
+    "একটি",
+    "গালি",
+    "বা",
+    "খারাপ",
+    "শব্দ"
+  ],
+  "badness": "16.67%"
+}</code></pre>
+
+              <p>Here's what the response means:</p>
+              <ol>
+                <li><b>bad_sentence:</b> Indicates whether the sentence contains any offensive/bad/slang words or not.
+                  This only returns boolean values.</li>
+                <li><b>bad_word_list:</b> Lists the offensive/bad/slang words found in the sentence.</li>
+                <li><b>normal_words:</b> Lists the words in the sentence that are considered normal or not
+                  offensive/bad/slang words.</li>
+                <li><b>badness:</b> Indicates the proportion of offensive/bad/slang words in the sentence.</li>
+              </ol>
+
+              <h3 id="Features">Features</h3>
+              <p>This can ignore special symbols like # ! @ etc. Many people on the internet use these types of special
+                symbols within slang words and AI systems cannot detect this most of the time. For example, Hello World
+                can be written like this "He#ll@ W@rl#d" which is so difficult for many AI systems to detect. Here we
+                used a simple approach! When there are special symbols in a word our API ignores them and then checks
+                that word.</p>
+              <p><a class="popup-img" href="assets/special-ignore.png"><img class="img-fluid border"
+                    src="assets/special-ignore.png" alt="Bangla Bad word detection API"></a></p>
+              <p>This API also ignores emojis🥳</p>
+              <p><a class="popup-img" href="assets/emoji.png"><img class="img-fluid border" src="assets/emoji.png"
+                    alt="Bangla Bad word detection API"></a></p>
+
+              <p>There are some words in Bangla that work as prefixes or suffixes and make other worlds toxic. You can
+                include the <code>prefixes_suffixes.json</code> file. This API finds those words in a sentence with any
+                word as prefixes or suffixes and declares that whole word as a negative word.</p>
+
+              <h3 id="Limitations">Limitations</h3>
+              <p>you cannot put any "/" symbol in the given sentence. For example, you have a text area where someone
+                writes "Hello world/earth" and you are testing the input value without any validation or sanitization.
+                If you do this then you will face problems like this: "Cannot GET /hello%20world/earth"</p>
+            </section>
+            <hr class="divider">
+
+            <!-- Update list of word
+		============================ -->
+            <section id="update-dataset">
+              <h2>Update Words (Dataset)</h2>
+              <p>Suppose you have your list of offensive/bad/slang words. You want to add them to your API. Then how can
+                you do that? Here in this repository, you can find the solution. After cloning the project you will see
+                3 files: input.txt, nirmol.json, and txt-2-nirmol.js.</p>
+              <pre><code class="bash">
+              .gitignore
+              index.js
+        🟡->  input.txt
+        🟢->  nirmol.json
+              nirmol.png
+              package-lock.json
+              package.json
+              prefixes_suffixes.json
+              README.md
+              tree.txt
+        🔴 -> txt-2-nirmol.js
+              +---datasets
+              |       Nirmol-v1-dataset.csv
+              |       
+              \---node_modules
+            </code></pre>
+              <p>Here the input.txt file contains all the offensive/bad/slang words available in the dataset. The
+                nirmol.json contains the same data structurally, and the txt-2-nirmol.js is the script that converts the
+                input.txt into the nirmol.json file.</p>
+              <h3>Updating JSON List from Text File</h3>
+
+              <ol>
+                <li>Edit the Text File:</li>
+                <ul>
+                  <li>Locate the text file: <code>input.txt</code></li>
+                  <li>Open the text file using a text editor of your choice.</li>
+                </ul>
+
+                <li>Update the Data in the Text File:</li>
+                <ul>
+                  <li>Modify the content of the text file according to your requirements.</li>
+                  <li>Add, remove, or edit the lines in the text file as needed.</li>
+                </ul>
+
+                <li>Save Changes:</li>
+                <ul>
+                  <li>Save the changes made to the text file.</li>
+                </ul>
+
+                <li>Run the Node.js Script:</li>
+                <ul>
+                  <li>Ensure that you have the Node.js script available for updating the JSON list.</li>
+                  <li>Open your terminal or command prompt.</li>
+                  <li>Navigate to the directory containing the Node.js script.</li>
+                </ul>
+
+                <li>Execute the Node.js Script:</li>
+                <ul>
+                  <li>Run the Node.js script by executing the following command:</li><br>
+                  <pre><code>node txt-2-nirmol.js</code></pre>
+                </ul>
+
+                <li>Verify Output:</li>
+                <ul>
+                  <li>Once the script execution is complete, verify that the JSON list has been updated correctly.</li>
+                  <li>Check the contents of the output JSON file ( <code>nirmol.json</code> ) to ensure that it reflects
+                    the changes made to the text
+                    file.</li>
+                </ul>
+              </ol>
+            </section>
+
+            <hr class="divider">
+            <section id="use">
+              <h2>Use Cases</h2>
+              <p>Here are some use cases of this API</p>
+              <ol>
+                <li>Content moderation: Bangla websites often host user-generated content such as comments, forum posts,
+                  or user profiles. This API can be integrated into these platforms to automatically detect and filter
+                  out inappropriate language, thus maintaining a clean and respectful environment for users.</li>
+                <li>Social media platforms: Social media platforms that support Bangla language content can use this API
+                  to automatically flag or filter out offensive or inappropriate content in user posts, comments, and
+                  messages, helping to maintain a positive and safe community for users.</li>
+                <li>E-commerce platforms: E-commerce websites serving the Bangla-speaking community can utilize this API
+                  to ensure that product reviews and comments remain free from offensive language, ensuring a positive
+                  shopping experience for customers.</li>
+                <li>Educational platforms: Educational websites and software applications targeting Bangla-speaking
+                  users can use this API to monitor and filter user-generated content in discussion forums, chatrooms,
+                  or collaborative projects, promoting a respectful and constructive learning environment.</li>
+                <li>Parental control software: Parental control software can leverage this API to monitor and filter out
+                  inappropriate content in Bangla language websites and applications, helping parents protect their
+                  children from exposure to harmful or offensive material online.</li>
+                <li>Chat applications: Bangla language chat applications can integrate this API to automatically detect
+                  and filter out offensive language in user messages, helping to maintain a friendly and respectful
+                  communication environment among users.</li>
+                <li>Customer support platforms: Customer support platforms serving Bangla-speaking customers can use
+                  this API to monitor and filter out abusive or inappropriate language in customer inquiries and support
+                  tickets, ensuring a professional and respectful interaction with users.</li>
+              </ol>
+            </section>
+            <hr class="divider">
+            <!-- FAQ
+		============================ -->
+            <section id="idocs_faq">
+              <h2>FAQ</h2>
+              <p class="text-4">A FAQ is a list of frequently asked questions (FAQs) and answers on a particular topic.
+              </p>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="accordion accordion-alterate arrow-right" id="popularTopics">
+                    <div class="card">
+                      <div class="card-header" id="heading1">
+                        <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse1"
+                            aria-expanded="false" aria-controls="collapse1">What does this API do?</a> </h5>
+                      </div>
+                      <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#popularTopics">
+                        <div class="card-body">This API analyzes input sentences to detect the presence of any
+                          potentially inappropriate or "bad" words.</div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="heading2">
+                        <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse2"
+                            aria-expanded="false" aria-controls="collapse2">What type of input does the API accept?</a>
+                        </h5>
+                      </div>
+                      <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#popularTopics">
+                        <div class="card-body">The API accepts URL-encoded sentences as input. You can pass a sentence
+                          directly in the URL as a query parameter.</div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="heading3">
+                        <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse3"
+                            aria-expanded="false" aria-controls="collapse3">What does the API response contain?</a>
+                        </h5>
+                      </div>
+                      <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#popularTopics">
+                        <div class="card-body">The API response is in JSON format and includes information such as
+                          whether the sentence contains bad words, a list of detected bad words, normal words in the
+                          sentence, and the badness percentage.</div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="heading4">
+                        <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse4"
+                            aria-expanded="false" aria-controls="collapse4">Is there a rate limit for using the Nirmol
+                            API?</a> </h5>
+                      </div>
+                      <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#popularTopics">
+                        <div class="card-body">For now, Nirmol is not providing any public API. You have to host your
+                          own. You can use the <a href="https://app.cyclic.sh/#/join/Sigmakib2">Cyclic</a> platform to
+                          deploy your project. Use the link to get a 10$ free Credit!</div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="heading5">
+                        <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse5"
+                            aria-expanded="false" aria-controls="collapse5">Can I integrate this API into my website or
+                            application?</a> </h5>
+                      </div>
+                      <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#popularTopics">
+                        <div class="card-body">Yes, you can integrate this API into your website, mobile app, or any
+                          software application that requires bad word detection functionality. Please share your work
+                          with us so that we can share with good people around the world!</div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="heading6">
+                        <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse6"
+                            aria-expanded="false" aria-controls="collapse6">Is there a cost associated with using this
+                            API?</a> </h5>
+                      </div>
+                      <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#popularTopics">
+                        <div class="card-body">No! Nirmol is an open-source project. We do not charge for the dataset or
+                          the source code. The only support we want is your feedback! Share your work, update and make
+                          the existing code better and that is what we love!</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </section>
+
+            <hr class="divider">
+
+            <!-- Source & Credits
+		============================ -->
+            <section id="idocs_source_credits">
+              <h2>Source & Credits</h2>
+              <h4>Dataset</h4>
+              <ul>
+                <li>Bengali-Hate-Speech-Dataset- <a target="_blank"
+                    href="https://github.com/rezacsedu/Bengali-Hate-Speech-Dataset">https://github.com/rezacsedu/Bengali-Hate-Speech-Dataset</a>
+                </li>
+                <li>BNLexicon- <a target="_blank"
+                    href="https://github.com/sazzadcsedu/BNLexicon">https://github.com/sazzadcsedu/BNLexicon</a></li>
+                <li>BAAD: A Multipurpose Dataset for Automatic Bangla Offensive Speech Recognition- <a target="_blank"
+                    href="https://data.mendeley.com/datasets/w24g8xn23c/3">https://data.mendeley.com/datasets/w24g8xn23c/3</a>
+                </li>
+              </ul>
+              <h4>Technology</h4>
+              <ul>
+                <li>Node.js - <a target="_blank" href="https://nodejs.org/">https://nodejs.org/</a>
+                </li>
+                <li>Express.js - <a target="_blank" href="https://expressjs.com/">https://expressjs.com/</a>
+                </li>
+              </ul>
+              <h4>Documentation Template</h4>
+              <ul>
+                <li>iDocs - <a target="_blank"
+                    href="https://github.com/harnishdesign/iDocs">https://github.com/harnishdesign/iDocs</a></li>
+              </ul>
+            </section>
+
+            <hr class="divider">
+
+        </div>
+        <!-- Document Wrapper end -->
+
+        <!-- Back To Top -->
+        <a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i
+            class="fa fa-chevron-up"></i></a>
+
+        <!-- JavaScript
+============================ -->
+        <script src="assets/vendor/jquery/jquery.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Highlight JS -->
+        <script src="assets/vendor/highlight.js/highlight.min.js"></script>
+        <!-- Easing -->
+        <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <!-- Magnific Popup -->
+        <script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <!-- Custom Script -->
+        <script src="assets/js/theme.js"></script>
 </body>
+
 </html>
