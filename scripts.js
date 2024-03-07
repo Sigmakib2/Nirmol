@@ -6,7 +6,7 @@
 
     function checkBadWords() {
       const inputText = document.getElementById('textInput').value;
-      fetch(`http://localhost:3000/${encodeURIComponent(inputText)}`)
+      fetch(`https://nirmol.cyclic.app/${encodeURIComponent(inputText)}`)
         .then(response => response.json())
         .then(data => {
           const resultDiv = document.getElementById('result');
