@@ -6,6 +6,8 @@
 
 **📑Documentation:** [Nirmol Doc](https://nirmol.pages.dev/https:/)
 
+📹**Project overview:** [YouTube](https://youtu.be/6wfPOn2xqno?si=JLfBxcusG7BBMIdW)
+
 ## Installation
 
 You can download the dataset from the GitHub repository but here is the [Direct dataset link ](https://github.com/Sigmakib2/Nirmol/tree/main/datasets). You can download and use this dataset for ML and AI model training.
@@ -56,7 +58,6 @@ The API endpoint analyzes a sentence for offensive/slang words and provides addi
 
 For example here is a get request and response:
 
-[![Bangla Bad word detection API](https://nirmol.pages.dev/assets/get-req.png)](https://nirmol.pages.dev/assets/get-req.png)
 
 ```
 {
@@ -83,7 +84,6 @@ For POST request: the endpoint is `"http://localhost:3000/"` and you have to sen
 }
 ```
 
-[![Bangla Bad word detection API](https://nirmol.pages.dev/assets/post-req.png)](https://nirmol.pages.dev/assets/post-req.png)
 
 Here's what the response means:
 
@@ -96,11 +96,9 @@ Here's what the response means:
 
 This can ignore special symbols like # ! @ etc. Many people on the internet use these types of special symbols within slang words and AI systems cannot detect this most of the time. For example, Hello World can be written like this "He#ll@ W@rl#d" which is so difficult for many AI systems to detect. Here we used a simple approach! When there are special symbols in a word our API ignores them and then checks that word.
 
-[![Bangla Bad word detection API](https://nirmol.pages.dev/assets/special-ignore.png)](https://nirmol.pages.dev/assets/special-ignore.png)
 
 This API also ignores emojis🥳
 
-[![Bangla Bad word detection API](https://nirmol.pages.dev/assets/emoji.png)](https://nirmol.pages.dev/assets/emoji.png)
 
 There are some words in Bangla that work as prefixes or suffixes and make other worlds toxic. You can include the `prefixes_suffixes.json` file. This API finds those words in a sentence with any word as prefixes or suffixes and declares that whole word as a negative word.
 
@@ -131,7 +129,7 @@ Suppose you have your list of offensive/bad/slang words. You want to add them to
               |       Nirmol-v1-dataset.csv
               |   
               \---node_modules
-    
+  
 ```
 
 Here the input.txt file contains all the offensive/bad/slang words available in the dataset. The nirmol.json contains the same data structurally, and the txt-2-nirmol.js is the script that converts the input.txt into the nirmol.json file
@@ -139,7 +137,7 @@ Here the input.txt file contains all the offensive/bad/slang words available in 
 ### Updating JSON List from Text File
 
 1. Edit the Text File:
-   * Locate the text file: `input.txt`
+   * Locate the text file:`input.txt`
    * Open the text file using a text editor of your choice.
 2. Update the Data in the Text File:
 
@@ -167,21 +165,21 @@ node txt-2-nirmol.js
 1. Verify Output:
 
 * Once the script execution is complete, verify that the JSON list has been updated correctly.
-* Check the contents of the output JSON file ( `nirmol.json` ) to ensure that it reflects the changes made to the text file.
+* Check the contents of the output JSON file (`nirmol.json` ) to ensure that it reflects the changes made to the text file.
 
 ## Source & Credits
 
 #### Dataset
 
-* Bengali-Hate-Speech-Dataset- [https://github.com/rezacsedu/Bengali-Hate-Speech-Dataset](https://github.com/rezacsedu/Bengali-Hate-Speech-Dataset)
-* BNLexicon- [https://github.com/sazzadcsedu/BNLexicon](https://github.com/sazzadcsedu/BNLexicon)
-* BAAD: A Multipurpose Dataset for Automatic Bangla Offensive Speech Recognition- [https://data.mendeley.com/datasets/w24g8xn23c/3](https://data.mendeley.com/datasets/w24g8xn23c/3)
+* Bengali-Hate-Speech-Dataset-[https://github.com/rezacsedu/Bengali-Hate-Speech-Dataset](https://github.com/rezacsedu/Bengali-Hate-Speech-Dataset)
+* BNLexicon-[https://github.com/sazzadcsedu/BNLexicon](https://github.com/sazzadcsedu/BNLexicon)
+* BAAD: A Multipurpose Dataset for Automatic Bangla Offensive Speech Recognition-[https://data.mendeley.com/datasets/w24g8xn23c/3](https://data.mendeley.com/datasets/w24g8xn23c/3)
 
 #### Technology
 
-* Node.js - [https://nodejs.org/](https://nodejs.org/)
-* Express.js - [https://expressjs.com/](https://expressjs.com/)
+* Node.js -[https://nodejs.org/](https://nodejs.org/)
+* Express.js -[https://expressjs.com/](https://expressjs.com/)
 
 #### Documentation Template
 
-* iDocs - [https://github.com/harnishdesign/iDocs](https://github.com/harnishdesign/iDocs)
+* iDocs -[https://github.com/harnishdesign/iDocs](https://github.com/harnishdesign/iDocs)
