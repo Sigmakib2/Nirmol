@@ -223,7 +223,7 @@
               <h2>API Response</h2>
               <p>The API endpoint analyzes a sentence for offensive/slang words and provides additional information
                 about the sentence.</p>
-              <p>For example here is a get request and response:</p>
+              <p class="lead">For example here is a get request and response:</p>
               <p><a class="popup-img" href="assets/get-req.png"><img class="img-fluid border" src="assets/get-req.png"
                     alt="Bangla Bad word detection API"></a></p>
               <pre><code class="json">{
@@ -241,6 +241,13 @@
   "badness": "16.67%"
 }</code></pre>
 
+<p class="lead">You can also use the POST method to get response. This feature was added by <a href="https://github.com/TasnimAnas">Tasnim Anas</a>.</p>
+<p>For POST request: the endpoint is <code>"http://localhost:3000/"</code> and you have to send payload in the body like this:</p>
+<pre><code>{
+  "sentence": "Your sentence here..."
+}</code></pre>
+<p><a class="popup-img" href="assets/post-req.png"><img class="img-fluid border"
+  src="assets/post-req.png" alt="Bangla Bad word detection API"></a></p>
               <p>Here's what the response means:</p>
               <ol>
                 <li><b>bad_sentence:</b> Indicates whether the sentence contains any offensive/bad/slang words or not.
@@ -268,9 +275,9 @@
                 word as prefixes or suffixes and declares that whole word as a negative word.</p>
 
               <h3 id="Limitations">Limitations</h3>
-              <p>you cannot put any "/" symbol in the given sentence. For example, you have a text area where someone
+              <p>you cannot put any "/" symbol in the given sentence (when you are using GET method). For example, you have a text area where someone
                 writes "Hello world/earth" and you are testing the input value without any validation or sanitization.
-                If you do this then you will face problems like this: "Cannot GET /hello%20world/earth"</p>
+                If you do this then you will face problems like this: "Cannot GET /hello%20world/earth". So you can use the POST method for this.</p>
             </section>
             <hr class="divider">
 
