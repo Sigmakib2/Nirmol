@@ -62,14 +62,12 @@ For example here is a get request and response:
 {
   "bad_sentence": true,
   "bad_word_list": [
-    "কুত্তা"
+    "word 1", "word 2"
   ],
   "normal_words": [
-    "একটি",
-    "গালি",
-    "বা",
-    "খারাপ",
-    "শব্দ"
+    "word 1",
+    "word 2",
+    "word 3"
   ],
   "badness": "16.67%"
 }
@@ -133,7 +131,7 @@ Suppose you have your list of offensive/bad/slang words. You want to add them to
               |       Nirmol-v1-dataset.csv
               |   
               \---node_modules
-      
+    
 ```
 
 Here the input.txt file contains all the offensive/bad/slang words available in the dataset. The nirmol.json contains the same data structurally, and the txt-2-nirmol.js is the script that converts the input.txt into the nirmol.json file
