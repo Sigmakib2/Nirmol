@@ -18,6 +18,9 @@ const corsOptions = {
 //Enable CORS with specific origin
 app.use(cors(corsOptions));
 
+// Receive request as json
+app.use(express.json());
+
 // Read the list of bad words from the Nirmol JSON file
 const word_list = new Set(JSON.parse(fs.readFileSync('nirmol.json', 'utf-8')));
 
@@ -49,10 +52,8 @@ function isBadWord(word) {
   return false;
 }
 
-app.get('/:sentence', (req, res) => {
-  let sentence = req.params.sentence.toLowerCase();
-
-  sentence = sentence.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '').replace(/।/g, '').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+const processResponse = (sentence, res) => {
+  sentence = sentence.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '').replace(/।/g, '').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
 
   const words = sentence.split(' ');
 
@@ -86,6 +87,24 @@ app.get('/:sentence', (req, res) => {
       badness: `0%`
     });
   }
+};
+
+app.get("/:sentence", (req, res) => {
+  const sentence = req.params.sentence.toLowerCase();
+  processResponse(sentence, res);
+});
+
+/*
+POST REQUEST:
+Request body format-
+{
+    "sentence": "your sentence here"
+}
+*/
+
+app.post("/", (req, res) => {
+  const sentence = req.body.sentence.toLowerCase();
+  processResponse(sentence, res);
 });
 
 const PORT = process.env.PORT || 3000;
