@@ -62,14 +62,30 @@ For example here is a get request and response:
 {
   "bad_sentence": true,
   "bad_word_list": [
-    "bad word 1", "bad word 2"
+    "কুত্তা"
   ],
   "normal_words": [
-"hi", "hello", "bye"
+    "একটি",
+    "গালি",
+    "বা",
+    "খারাপ",
+    "শব্দ"
   ],
   "badness": "16.67%"
 }
 ```
+
+You can also use the POST method to get response. This feature was added by [Tasnim Anas](https://github.com/TasnimAnas).
+
+For POST request: the endpoint is `"http://localhost:3000/"` and you have to send payload in the body like this:
+
+```
+{
+  "sentence": "Your sentence here..."
+}
+```
+
+[![Bangla Bad word detection API](https://nirmol.pages.dev/assets/post-req.png)](https://nirmol.pages.dev/assets/post-req.png)
 
 Here's what the response means:
 
@@ -82,13 +98,17 @@ Here's what the response means:
 
 This can ignore special symbols like # ! @ etc. Many people on the internet use these types of special symbols within slang words and AI systems cannot detect this most of the time. For example, Hello World can be written like this "He#ll@ W@rl#d" which is so difficult for many AI systems to detect. Here we used a simple approach! When there are special symbols in a word our API ignores them and then checks that word.
 
+[![Bangla Bad word detection API](https://nirmol.pages.dev/assets/special-ignore.png)](https://nirmol.pages.dev/assets/special-ignore.png)
+
 This API also ignores emojis🥳
+
+[![Bangla Bad word detection API](https://nirmol.pages.dev/assets/emoji.png)](https://nirmol.pages.dev/assets/emoji.png)
 
 There are some words in Bangla that work as prefixes or suffixes and make other worlds toxic. You can include the `prefixes_suffixes.json` file. This API finds those words in a sentence with any word as prefixes or suffixes and declares that whole word as a negative word.
 
 ### Limitations
 
-you cannot put any "/" symbol in the given sentence. For example, you have a text area where someone writes "Hello world/earth" and you are testing the input value without any validation or sanitization. If you do this then you will face problems like this: "Cannot GET /hello%20world/earth"
+you cannot put any "/" symbol in the given sentence (when you are using GET method). For example, you have a text area where someone writes "Hello world/earth" and you are testing the input value without any validation or sanitization. If you do this then you will face problems like this: "Cannot GET /hello%20world/earth". So you can use the POST method for this.
 
 ## Update Words (Dataset)
 
@@ -113,7 +133,7 @@ Suppose you have your list of offensive/bad/slang words. You want to add them to
               |       Nirmol-v1-dataset.csv
               |   
               \---node_modules
-        
+      
 ```
 
 Here the input.txt file contains all the offensive/bad/slang words available in the dataset. The nirmol.json contains the same data structurally, and the txt-2-nirmol.js is the script that converts the input.txt into the nirmol.json file
