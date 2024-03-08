@@ -19,7 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Read the list of bad words from the Nirmol JSON file
-const word_list = JSON.parse(fs.readFileSync('nirmol.json', 'utf-8'));
+const word_list = new Set(JSON.parse(fs.readFileSync('nirmol.json', 'utf-8')));
 
 // Read the prefixes and suffixes from the JSON file
 const prefixesSuffixes = JSON.parse(fs.readFileSync('prefixes_suffixes.json', 'utf-8'));
@@ -30,7 +30,7 @@ function isBadWord(word) {
 
   word = word.toLowerCase();
 
-  if (word_list.includes(word)) {
+  if (word_list.has(word)) {
     return true;
   }
 
