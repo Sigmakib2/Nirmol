@@ -4,7 +4,7 @@
 
 ![](nirmol.png)
 
-**📑Documentation:** [Nirmol Doc](https://nirmol.pages.dev/https:/)
+**📑Documentation:** [Nirmol Doc](https://nirmol.pages.dev/)
 
 📹**Project overview:** [YouTube](https://youtu.be/6wfPOn2xqno?si=JLfBxcusG7BBMIdW)
 
