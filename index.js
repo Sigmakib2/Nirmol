@@ -89,9 +89,10 @@ const processResponse = (sentence, res) => {
   }
 };
 
-app.get("/:sentence", (req, res) => {
-  const sentence = req.params.sentence.toLowerCase();
-  processResponse(sentence, res);
+app.get("/*", (req, res) => {
+  const rawPath = req.params[0];
+  const cleaned = rawPath.toLowerCase().replace(/\//g, " "); // replace when found any / or others 
+  processResponse(cleaned, res);
 });
 
 /*
@@ -103,7 +104,11 @@ Request body format-
 */
 
 app.post("/", (req, res) => {
-  const sentence = req.body.sentence.toLowerCase();
+  if (!req.body || !req.body.sentence) {
+    return res.status(400).json({ error: "Missing 'sentence' in request body" });
+  }
+  const sentence = req.body.sentence.toLowerCase().replace(/\//g, " ");
+  // const sentence = req.body.sentence.toLowerCase();
   processResponse(sentence, res);
 });
 
